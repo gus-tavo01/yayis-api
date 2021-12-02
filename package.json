@@ -1,0 +1,39 @@
+{
+  "name": "yayis-api",
+  "version": "1.0.0",
+  "description": "web api for todos management",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gus-tavo01/yayis-api.git"
+  },
+  "keywords": [
+    "api",
+    "todos"
+  ],
+  "author": "GALV",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gus-tavo01/yayis-api/issues"
+  },
+  "homepage": "https://github.com/gus-tavo01/yayis-api#readme",
+  "dependencies": {
+    "@jest-mock/express": "^1.4.5",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jest": "^27.4.3",
+    "mongoose": "^6.0.14",
+    "mongoose-paginate-v2": "^1.4.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.3.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.0"
+  }
+}
