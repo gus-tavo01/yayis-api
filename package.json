@@ -4,7 +4,9 @@
   "description": "web api for todos management",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest unit",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -22,13 +24,19 @@
   "homepage": "https://github.com/gus-tavo01/yayis-api#readme",
   "dependencies": {
     "@jest-mock/express": "^1.4.5",
+    "@meanie/mongoose-to-json": "^2.6.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "jest": "^27.4.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.14",
-    "mongoose-paginate-v2": "^1.4.2"
+    "mongoose-paginate-v2": "^1.4.2",
+    "passport": "^0.5.0",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
