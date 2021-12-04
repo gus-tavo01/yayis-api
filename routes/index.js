@@ -8,11 +8,12 @@ const api = '/api/v1';
 // middlewares
 const errorHandlerMiddleware = require('../middlewares/errorHandler');
 const customResponse = require('../middlewares/customResponse');
+const requireAuth = require('../middlewares/requireAuth');
 
 router.use(customResponse);
 
 // app routes
-router.use(`${api}/lists`, listsRouter);
+router.use(`${api}/lists`, requireAuth, listsRouter);
 // router.use(`${api}/users`, usersRouter);
 // router.use(`${api}/themes`, themesRouter);
 
