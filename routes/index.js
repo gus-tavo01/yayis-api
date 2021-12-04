@@ -1,4 +1,5 @@
 const { Router } = require('express');
+require('express-async-errors');
 const listsRouter = require('./lists/router');
 
 const router = Router();
