@@ -6,7 +6,7 @@ const baseResponse = {
   validationErrors: [],
 };
 
-exports.ok = (payload) => ({ ...baseResponse.errorMessage, payload });
+exports.ok = (payload) => ({ ...baseResponse, payload });
 
 exports.created = (payload) => ({
   ...baseResponse,
