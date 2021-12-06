@@ -18,6 +18,10 @@ const ListSchema = new Schema({
     required: true,
   },
   todos: [TodoSchema],
+  createDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 ListSchema.plugin(mongoosePaginate);
