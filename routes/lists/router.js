@@ -4,7 +4,7 @@ const listsController = require('./controller');
 const router = Router()
   .get('/', listsController.get)
   .post('/', listsController.post)
-  .patch('/:id', listsController.patch)
-  .delete(':id', listsController.delete);
+  .patch('/:listId', listsController.patch)
+  .delete('/:listId', listsController.delete);
 
 module.exports = router;
