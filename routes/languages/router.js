@@ -6,7 +6,7 @@ const requireAuth = require('../../middlewares/requireAuth');
 const router = Router()
   .get('/', controller.get)
   .post('/', requireAuth, controller.post)
-  .patch('/:id', requireAuth, controller.patch)
-  .delete('/:id', requireAuth, controller.delete);
+  .patch('/:languageId', requireAuth, controller.patch)
+  .delete('/:languageId', requireAuth, controller.delete);
 
 module.exports = router;
