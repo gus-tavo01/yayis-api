@@ -2,10 +2,13 @@ const { Schema, model } = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const mongooseNormalize = require('@meanie/mongoose-to-json');
 
-const UserConfigurationSchema = new Schema({
-  themeId: Schema.Types.ObjectId,
-  languageId: Schema.Types.ObjectId,
-});
+const UserConfigurationSchema = new Schema(
+  {
+    theme: { type: Schema.Types.ObjectId, ref: 'Theme' },
+    language: { type: Schema.Types.ObjectId, ref: 'Language' },
+  },
+  { _id: false }
+);
 
 const UserSchema = new Schema({
   email: {
