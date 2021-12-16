@@ -6,6 +6,7 @@ const requireAuth = require('../../middlewares/requireAuth');
 const router = Router()
   .post('/login', usersController.login)
   .put('/password', usersController.passwordReset)
+  .get('/:userId', usersController.getById)
   .post('/', usersController.post)
   .get('/', requireAuth, usersController.get)
   .patch('/:userId', requireAuth, usersController.patch)
