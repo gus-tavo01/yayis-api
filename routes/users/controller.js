@@ -60,11 +60,47 @@ exports.login = async (req, res) => {
   return res.Ok({ token, expiration: tokenExpiration });
 };
 
-// TODO
-exports.patch = async (req, res) => {
+exports.getById = async (req, res) => {
+  // TODO
   // Validate inputs
+  const { userId } = req.params;
+
+  // Get whole user
+  const user = await UserModel.findById(userId)
+    .populate('configuration.theme')
+    .populate('configuration.language');
+
+  // User is not found
+  if (!user) return res.NotFound(`User with id ${userId} cannot be found`);
+  return res.Ok(user);
+};
+
+exports.patch = async (req, res) => {
+  // TODO:
+  // Validate inputs
+
+  const { userId } = req.params;
+
   // Verify user exist
-  // update user theme, language, darkMode, isDisabled?
+  const foundUser = await UserModel.findById(userId, null, { lean: true });
+  if (!foundUser) return res.NotFound(`User with id ${userId} cannot be found`);
+
+  // Create patch object
+  const patch = { ...req.body };
+
+  if (req.body.configuration) {
+    patch.configuration = {
+      ...foundUser.configuration,
+      ...req.body.configuration,
+    };
+  }
+
+  // Update user theme, language, isDisabled?
+  const updated = await UserModel.findByIdAndUpdate(userId, patch, {
+    new: true,
+  });
+
+  return res.Ok(updated);
 };
 
 // TODO
