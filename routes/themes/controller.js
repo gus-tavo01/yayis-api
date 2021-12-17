@@ -32,8 +32,49 @@ exports.post = async (req, res) => {
   return res.Created(newTheme);
 };
 
-// TODO
-exports.patch = async (req, res) => {};
+exports.patch = async (req, res) => {
+  // Validate inputs
+  const { themeId } = req.params;
 
-// TODO
-exports.delete = async (req, res) => {};
+  // Verify if exist
+  const foundTheme = await ThemeModel.findById(themeId, null, { lean: true });
+  if (!foundTheme)
+    return res.NotFound(`Theme with id '${themeId}' is not found`);
+
+  // TODO
+  // Validate permissions
+
+  // Create patch obj
+  const patch = { ...req.body };
+
+  if (req.body.palette) {
+    patch.palette = {
+      ...foundTheme.palette,
+      ...req.body.palette,
+    };
+  }
+
+  // Update theme
+  const updatedTheme = await ThemeModel.findByIdAndUpdate(themeId, patch, {
+    new: true,
+  });
+  return res.Ok(updatedTheme);
+};
+
+exports.delete = async (req, res) => {
+  // TODO
+  // Validate inputs
+  const { themeId } = req.params;
+
+  // Verify if exist
+  const foundTheme = await ThemeModel.findById(themeId);
+  if (!foundTheme)
+    return res.NotFound(`Theme with id '${themeId}' is not found`);
+
+  // TODO
+  // Validate user permissions
+
+  // Delete theme
+  const deleted = await ThemeModel.findByIdAndDelete(themeId);
+  return res.Ok(deleted.id);
+};
