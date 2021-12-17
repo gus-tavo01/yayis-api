@@ -8,6 +8,10 @@ const LanguageSchema = new Schema({
     type: String,
     required: true,
   },
+  code: {
+    type: String,
+    required: true,
+  },
   createDate: {
     type: Date,
     default: Date.now,
