@@ -21,5 +21,5 @@ app.use(routes);
 const port = process.env.PORT || 3300;
 
 app.listen(port, () => {
-  if (process.env.DEVELOPMENT) console.log(`App running on PORT: ${port}`);
+  if (process.env !== 'production') console.log(`App running on PORT: ${port}`);
 });
