@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const listsController = require('./controller');
 
-const router = Router()
+const router = Router({ mergeParams: true })
   .get('/', listsController.get)
   .post('/', listsController.post)
   .patch('/:listId', listsController.patch)

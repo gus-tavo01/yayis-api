@@ -17,8 +17,8 @@ const requireAuth = require('../middlewares/requireAuth');
 router.use(customResponse);
 
 // app routes
-router.use(`${api}/lists`, requireAuth, listsRouter);
 router.use(`${api}/users`, usersRouter);
+router.use(`${api}/users/:userId/lists`, requireAuth, listsRouter);
 router.use(`${api}/languages`, languagesRouter);
 router.use(`${api}/themes`, themesRouter);
 
