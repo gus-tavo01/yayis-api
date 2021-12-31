@@ -11,7 +11,10 @@ const res = getMockRes();
 describe('Lists Controller GET', () => {
   test('When valid params are provided, expect response to be success', async () => {
     // Arange
-    const req = getMockReq({ query: {} });
+    const userId = '61ad434c6a66c8fd8063cab8';
+    const user = { id: userId };
+
+    const req = getMockReq({ query: {}, params: { userId }, user });
 
     // mocks
     const lists = { docs: [] };
