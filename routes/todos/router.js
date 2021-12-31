@@ -3,7 +3,7 @@ const todosController = require('./controller');
 
 const router = Router({ mergeParams: true })
   .post('/', todosController.post)
-  .patch('/:listId', todosController.patch)
-  .delete('/:listId', todosController.delete);
+  .patch('/:todoId', todosController.patch)
+  .delete('/:todoId', todosController.delete);
 
 module.exports = router;
