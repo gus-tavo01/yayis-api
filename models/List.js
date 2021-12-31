@@ -18,6 +18,7 @@ const ListSchema = new Schema({
     required: true,
   },
   todos: [TodoSchema],
+  userId: { type: Schema.Types.ObjectId, required: true },
   createDate: {
     type: Date,
     default: Date.now,
