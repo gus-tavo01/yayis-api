@@ -26,5 +26,6 @@ const ListSchema = new Schema({
 
 ListSchema.plugin(mongoosePaginate);
 ListSchema.plugin(mongooseNormalize);
+TodoSchema.plugin(mongooseNormalize);
 
 module.exports = model('List', ListSchema);
