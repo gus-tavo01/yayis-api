@@ -32,18 +32,29 @@ exports.get = async (req, res) => {
 };
 
 exports.post = async (req, res) => {
+  const { user } = req;
+  const { userId: targetUserId } = req.params;
+  const { name } = req.body;
+
   // TODO:
   // validate input body
 
   // verify list does not exist
-  const { name } = req.body;
   const list = await ListModel.findOne({ name });
   if (list)
     return res.Conflict(`A list with this name '${name}' already exists`);
 
+  // TODO
+  // Validate user permissions to create lists
+
+  // Temporal aproach
+  if (targetUserId !== user.id)
+    return res.Forbidden('Cannot create lists for any other user');
+
   // create new list
-  const newList = await new ListModel(req.body).save();
-  return res.Created(newList);
+  const newList = { ...req.body, userId: targetUserId };
+  const createdList = await new ListModel(newList).save();
+  return res.Created(createdList);
 };
 
 exports.patch = async (req, res) => {
