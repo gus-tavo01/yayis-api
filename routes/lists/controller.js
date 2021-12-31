@@ -2,11 +2,18 @@ const ListModel = require('../../models/List');
 // jsvalidator?
 
 exports.get = async (req, res) => {
+  const { user } = req;
+  const { userId: targetUserId } = req.params;
+
   // TODO
   // validate query params
   // use model validation (req.query)
 
-  const filters = {};
+  // Validate user permissions
+  if (user.id !== targetUserId)
+    return res.Forbidden('Cannot retrieve lists from another user');
+
+  const filters = { userId: user.id };
   let sortBy = 'createDate';
   let sortOrder = 'desc';
   const options = {
