@@ -10,8 +10,7 @@ exports.get = async (req, res) => {
   // use model validation (req.query)
 
   // Validate user permissions
-  if (user.id !== targetUserId)
-    return res.Forbidden('Cannot retrieve lists from another user');
+  if (user.id !== targetUserId) return res.Forbidden('Action forbidden');
 
   const filters = { userId: user.id };
   let sortBy = 'createDate';
@@ -55,8 +54,7 @@ exports.post = async (req, res) => {
   // Validate user permissions to create lists
 
   // Temporal aproach
-  if (targetUserId !== user.id)
-    return res.Forbidden('Cannot create lists for any other user');
+  if (targetUserId !== user.id) return res.Forbidden('Action forbidden');
 
   // create new list
   const newList = { ...req.body, userId: targetUserId };
@@ -65,10 +63,14 @@ exports.post = async (req, res) => {
 };
 
 exports.patch = async (req, res) => {
-  const { listId } = req.params;
+  const { user } = req;
+  const { listId, userId: targetUserId } = req.params;
 
   // TODO:
   // validate inputs
+
+  // validate user permissions
+  if (targetUserId !== user.id) return res.Forbidden('Action forbidden');
 
   // verify list exists
   const foundList = await ListModel.findById(listId);
@@ -82,7 +84,8 @@ exports.patch = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const { listId } = req.params;
+  const { user } = req;
+  const { listId, userId: targetUserId } = req.params;
 
   // TODO:
   // validate inputs
@@ -90,6 +93,9 @@ exports.delete = async (req, res) => {
   // verify list exist
   const foundList = await ListModel.findById(listId);
   if (!foundList) return res.NotFound(`No lists matching with id ${listId}`);
+
+  // validate permissions
+  if (user.id !== targetUserId) return res.Forbidden('Action forbidden');
 
   // remove list
   const removedList = await ListModel.findByIdAndDelete(listId);
