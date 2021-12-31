@@ -2,6 +2,7 @@ const { Router } = require('express');
 require('express-async-errors'); // temporal until express v5 is released
 
 const listsRouter = require('./lists/router');
+const todosRouter = require('./todos/router');
 const usersRouter = require('./users/router');
 const languagesRouter = require('./languages/router');
 const themesRouter = require('./themes/router');
@@ -19,6 +20,7 @@ router.use(customResponse);
 // app routes
 router.use(`${api}/users`, usersRouter);
 router.use(`${api}/users/:userId/lists`, requireAuth, listsRouter);
+router.use(`${api}/lists/:listId/todos`, requireAuth, todosRouter);
 router.use(`${api}/languages`, languagesRouter);
 router.use(`${api}/themes`, themesRouter);
 
