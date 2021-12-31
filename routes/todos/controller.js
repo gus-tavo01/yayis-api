@@ -26,18 +26,43 @@ exports.post = async (req, res) => {
 exports.patch = async (req, res) => {
   const { listId, todoId } = req.params;
 
+  // TODO:
   // Validate inputs
 
   // Validate list exist
   const foundList = await ListModel.findById(listId);
+  if (!foundList)
+    return res.UnprocessableEntity(`List '${listId}' is not found`);
 
   // Validate todo exist
   const foundTodo = await foundList.todos.id(todoId);
+  if (!foundTodo) return res.NotFound(`Todo '${todoId}' is not found`);
 
-  // TODO:
   // Update todo
+  const updatedTodo = await foundTodo.set(req.body);
+  await foundList.save();
 
   return res.Ok(updatedTodo);
 };
 
-exports.delete = async (req, res) => {};
+exports.delete = async (req, res) => {
+  const { listId, todoId } = req.params;
+
+  // TODO
+  // Validate inputs
+
+  // Validate list exist
+  const foundList = await ListModel.findById(listId);
+  if (!foundList)
+    return res.UnprocessableEntity(`List '${listId}' does not exist`);
+
+  // Validate todo exist
+  const foundTodo = await foundList.todos.id(todoId);
+  if (!foundTodo) return res.NotFound(`Todo '${todoId}'is not found`);
+
+  // Remove item
+  await foundList.todos.id(todoId).remove();
+  await foundList.save();
+
+  return res.Ok(foundTodo);
+};
