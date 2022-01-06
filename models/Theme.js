@@ -9,6 +9,7 @@ const ColorSchema = new Schema(
     main: String,
     dark: String,
     contrastText: String,
+    text: String,
   },
   { _id: false }
 );
