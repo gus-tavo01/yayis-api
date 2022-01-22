@@ -1,6 +1,10 @@
 const UserModel = require('../../models/User');
+const ThemeModel = require('../../models/Theme');
+const LanguageModel = require('../../models/Language');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
+
+const defaults = require('../../common/constants/defaults');
 
 exports.get = async (req, res) => {
   // TODO:
@@ -26,8 +30,28 @@ exports.post = async (req, res) => {
   const salt = await bcrypt.genSalt();
   const passwordHash = await bcrypt.hash(password, salt);
 
+  // Get default theme
+  const foundTheme = await ThemeModel.findOne({ code: defaults.theme });
+
+  if (!foundTheme) {
+    return res.UnprocesableEntity('Theme cannot be added');
+  }
+
+  // Get default language
+  const foundLanguage = await LanguageModel.findOne({
+    code: defaults.language,
+  });
+
+  if (!foundLanguage) {
+    return rees.UnprocesableEntity('Language cannot be added');
+  }
+
   // Create new user
-  const newUser = await new UserModel({ email, passwordHash }).save();
+  const newUser = await new UserModel({
+    email,
+    passwordHash,
+    configuration: { theme: foundTheme.id, language: foundLanguage.id },
+  }).save();
 
   return res.Created(newUser);
 };
