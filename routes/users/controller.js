@@ -4,15 +4,20 @@ const LanguageModel = require('../../models/Language');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 
+const paginate = require('../../common/utils/paginate');
 const defaults = require('../../common/constants/defaults');
 
 exports.get = async (req, res) => {
   // TODO:
   // Validate inputs
 
-  // TODO:
-  // handle params
-  const users = await UserModel.paginate();
+  const filters = {};
+  const config = { ...paginate(req.query), populate: 'configuration.theme' };
+
+  // handle query params
+  if (req.query.email) filters.email = req.query.email;
+
+  const users = await UserModel.paginate(filters, config);
   return res.Ok(users);
 };
 
