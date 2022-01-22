@@ -43,7 +43,7 @@ exports.post = async (req, res) => {
   });
 
   if (!foundLanguage) {
-    return rees.UnprocesableEntity('Language cannot be added');
+    return res.UnprocesableEntity('Language cannot be added');
   }
 
   // Create new user
