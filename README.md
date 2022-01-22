@@ -2,36 +2,32 @@
 
 ## Features
 
-- CRUD for lists, users
-- Get available themes for todo app
-- Get available languages for app
-- Login
-- User registration
+- lists CRUD
+- todos CRUD
+- Get app themes
+- Get app languages
+- User management
+  - Login
+  - Registration
+  - Update configuration
+  - Reset password
 
-## Todos
+## Pending
 
-### Prioritary
-
-- update lists controller
-  - lists belongs to users
-- todos controller
-  - post
-  - patch
-  - delete
-
-### Secondary
-
-- implement js-validation-tool
-- research about refresh tokens
 - Users controller
-  - reset pwd
-  - patch
-- define how to recover your account once removed(disabled)
-- Define how local data would sync (Controller for bulk support?)
-  - post
-  - put
+  - POST reset pwd endpoint
+- implement js-validation-tool
+- validate user on
+  - delete/patch theme
+  - delete/patch language
+  - delete/patch another user
 
-### Low priority
+## To Be Defined
+
+- Forgot password process
+- refresh tokens?
+
+## Low priority issues
 
 - eslint (warning ES modules)
 
@@ -69,8 +65,4 @@
 
 ### Integration
 
-- Model layer
-
-## Features
-
-Validate user to delete actions (languages, themes, users, lists)
+- Controllers only
