@@ -21,6 +21,10 @@
   - delete/patch theme
   - delete/patch language
   - delete/patch another user
+- Add documentation about processes
+  - Development
+  - Testing
+  - Deploy
 
 ## To Be Defined
 
